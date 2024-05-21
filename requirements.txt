@@ -12,3 +12,5 @@ pytz>=2022.6
 pyparsing>=3.0.9
 prompt-toolkit>=3.0.36
 attrs>=23.1.0
+mdit-py-plugins>=0.4.1
+markdown-it-py>=3.0.0
