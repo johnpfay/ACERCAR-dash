@@ -116,7 +116,10 @@ def server(input, output, session):
         the_plot = line_plot(the_var,the_ubigeo,the_offset)
         return the_plot
 
-app = App(app_ui, server, debug=True)
+app = App(app_ui, server, debug=False)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000)
 
 ##-OUTPUT---------------------------------------------
 
