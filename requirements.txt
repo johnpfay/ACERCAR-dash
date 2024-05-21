@@ -6,3 +6,6 @@ shinywidgets>=0.3.2
 pyproj>=3.6.1
 pygments>=2.17.2
 pillow>=10.3.0
+pytz>=2022.6
+pyparsing>=3.0.9
+prompt-toolkit>=3.0.36
