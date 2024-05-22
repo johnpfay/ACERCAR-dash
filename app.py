@@ -6,6 +6,7 @@
 
 #%%Import packages
 #Import packages
+import scipy
 import pandas as pd
 import geopandas as gpd
 from pathlib import Path
