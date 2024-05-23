@@ -6,11 +6,12 @@ Summer 2024
 
 ## Conda Recipe
 
-```
+```conda
 conda create --name shinyserver_01 python=3.9 -y
 activate shinyserver_01
-conda install -c esri geopandas ipyleaflet matplotlib -y
+pip install geopandas
+pip install ipywidgets
+pip install matplotlib
 pip install shinywidgets
-pip install shinylive
+pip install scipy
 ```
-
