@@ -1,6 +1,6 @@
-geopandas>=0.14.4
-shiny>=0.9.0
-numpy>=1.22.4
-pandas>=2.0.2
-matplotlib>=3.8.4
-ipyleaflet>=0.19.1
+geopandas
+pandas
+scipy
+shinywidgets
+ipyleaflet
+matplotlib
