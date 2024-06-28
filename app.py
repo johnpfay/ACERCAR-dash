@@ -24,19 +24,38 @@ from shiny import ui, render, App
 df_merged = pd.read_pickle(Path(__file__).parent / 'Loreto_merged_data')
 gdf_districts = gpd.GeoDataFrame(pd.read_pickle(Path(__file__).parent / 'Peru_departamentos'))
 
+#%% FUNCTIONS
 #Filter function (whenever the LDAS variable changes)
 def filter_data(df=df_merged, var='Rainfall(mm)', species='p_fal'):
-    '''Filter data on LDAS variable and species'''
+    '''Filter data on LDAS variable and species
+    
+    Parameters:
+    df (DataFrame): The input DataFrame containing the data.
+    var (str): The LDAS variable to filter on.
+    species (str): The species to filter on.
+    
+    Returns:
+    DataFrame: The filtered DataFrame.
+    '''
     #Filter the data for a single variable and species
     df_filtered = df.xs(var, level='LDAS_variable').xs(species, level='species')
     #Sort the data on ubigeo and EpiweekStartDate
     df_filtered.sort_values(['ubigeo','EpiweekStartDate'], inplace=True)
     return df_filtered
 
-#%% FUNCTIONS
 #Plot function
 def line_plot(the_var, the_ubigeo, the_offset):
-    '''Create a line plot'''
+    '''Create a line plot.
+
+    Args:
+        the_var (str): The variable to plot.
+        the_ubigeo (str): The district to plot.
+        the_offset (int): The number of weeks to offset the case rate values.
+
+    Returns:
+        None
+
+    '''
     #Create the plot title
     the_title = f"P. Vivax cases & {the_var} for district {the_ubigeo}: {the_offset} weeks offset"
     print(the_title)
@@ -72,7 +91,18 @@ def line_plot(the_var, the_ubigeo, the_offset):
     ax.set_xlim(pd.Timestamp(start_time), pd.Timestamp(end_time))
 
 #Create map of correlations
-def plot_correlations(the_var,the_offset,basemap):
+def plot_correlations(the_var, the_offset, basemap):
+    """
+    Plots the correlations between the specified variable and LDAS values on a choropleth map.
+
+    Parameters:
+    - the_var (str): The variable to plot correlations for.
+    - the_offset (int): The time offset for computing correlations.
+    - basemap (object): The basemap object to add the choropleth layer to.
+
+    Returns:
+    - basemap (object): The updated basemap object with the choropleth layer added.
+    """
     #FILTER DATA
     df_filtered = df_merged.xs(the_var,level='LDAS_variable').xs('p_fal',level='species')
 
@@ -111,7 +141,6 @@ def plot_correlations(the_var,the_offset,basemap):
     # add to basemap
     basemap.add(choro_layer)
     
-
     return basemap
 
 #%%Create app layout
